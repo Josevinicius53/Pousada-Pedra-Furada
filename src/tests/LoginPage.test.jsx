@@ -1,27 +1,26 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import LoginPage from "/workspaces/Pedra-Furada/src/pages/LoginPage.jsx";
-test("deve exibir alerta se usuário ou senha estiverem vazios", () => {
- window.alert = jest.fn();
- render(
- <MemoryRouter>
- <LoginPage />
- </MemoryRouter>
- );
- fireEvent.click(screen.getByText("Entrar"));
- expect(window.alert).toHaveBeenCalledWith("Por favor, preencha usuário e senha.");
-});
-test("deve redirecionar ao preencher login corretamente", () => {
- window.alert = jest.fn();
- render(
- <MemoryRouter>
- <LoginPage />
- </MemoryRouter>
- );
- fireEvent.change(screen.getByLabelText("Usuário:"), { target: { value: "Maria"
-} });
- fireEvent.change(screen.getByLabelText("Senha:"), { target: { value: "123" }
-});
- fireEvent.click(screen.getByText("Entrar"));
- expect(window.alert).toHaveBeenCalledWith("Bem-vindo, Maria!");
+import LoginPage from "../pages/LoginPage";
+
+jest.mock("../components/Layout", () => ({ children }) => <div>{children}</div>);
+
+describe("LoginPage.jsx — Autenticação de usuário", () => {
+  it("deve exibir erro se usuário estiver vazio", () => {
+    render(<LoginPage />);
+    const botao = screen.getByRole("button", { name: /entrar/i });
+    fireEvent.click(botao);
+    expect(screen.getByText(/preencha o usuário/i)).toBeInTheDocument();
+  });
+
+  it("deve exibir erro se senha for menor que 3 caracteres", () => {
+    render(<LoginPage />);
+    fireEvent.change(screen.getByPlaceholderText("Digite seu usuário"), {
+      target: { value: "usuario" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Digite sua senha"), {
+      target: { value: "ab" },
+    });
+    const botao = screen.getByRole("button", { name: /entrar/i });
+    fireEvent.click(botao);
+    expect(screen.getByText(/mínimo 3 caracteres/i)).toBeInTheDocument();
+  });
 }); 
