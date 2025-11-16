@@ -1,15 +1,15 @@
 import React from "react";
-import Header from "./Headers.jsx";
-import Footer from "./Footer.jsx";
+import Header from "./Headers";
+import Footer from "./Footer";
 
 export default function Layout({ children }) {
- return (
- <div className="layout">
- <Header />
- <main style={{ padding: "1rem" }}>
- {children}
- </main>
- <Footer />
- </div>
- );
+  return (
+    <div className="layout">
+      <Header />
+      <main style={{ padding: "1rem" }}>
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
 } 
