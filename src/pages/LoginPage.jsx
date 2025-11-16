@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
-import styles from "./LoginPage.module.css";
+import styles from "./styles/LoginPage.module.css";
 
 export default function LoginPage() {
   const [usuario, setUsuario] = useState("");
