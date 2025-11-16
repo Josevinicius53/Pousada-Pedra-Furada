@@ -1,0 +1,19 @@
+{
+  "name": "Pousada Pedra Furada - Next.js",
+  "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:0-20",
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm install",
+  "remoteUser": "node",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-playwright.playwright"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  }
+}
